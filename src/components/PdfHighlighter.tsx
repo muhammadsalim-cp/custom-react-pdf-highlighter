@@ -182,7 +182,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
         container: this.containerNode,
         eventBus: this.eventBus,
         enhanceTextSelection: true,
-        removePageBorders: true,
+        removePageBorders: false,
         linkService: this.linkService,
       });
 
@@ -421,6 +421,41 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
     }, 100);
   };
 
+  scrollByPageNumber = (pageNumber: number = 3) => {
+
+    this.viewer.container.removeEventListener("scroll", this.onScroll);
+
+    const pageViewport = this.viewer.getPageView(pageNumber).viewport;
+
+    const scrollMargin = 10;
+    
+    // this.viewer.scrollPageIntoView({
+    //   pageNumber,
+    //   destArray: [
+    //     null,
+    //     { name: "XYZ" },
+    //     ...pageViewport.convertToPdfPoint(
+    //       0,
+    //       scaledToViewport({x1:0,y1:0,x2:0,y2:0,height:0,width:0}, pageViewport).top -
+    //         scrollMargin
+    //     ),
+    //     0,
+    //   ],
+    // });
+
+    // this.setState(
+    //   {
+    //     scrolledToHighlightId: highlight.id,
+    //   },
+    //   () => this.renderHighlights()
+    // );
+
+    // wait for scrolling to finish
+    setTimeout(() => {
+      this.viewer.container.addEventListener("scroll", this.onScroll);
+    }, 100);
+  };
+
   onDocumentReady = () => {
     const { scrollRef } = this.props;
 
@@ -630,6 +665,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
             />
           ) : null}
         </div>
+        <button onClick={(e)=>this.scrollByPageNumber}>abcd</button>
       </div>
     );
   }

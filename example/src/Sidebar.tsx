@@ -16,6 +16,7 @@ export function Sidebar({
   toggleDocument,
   resetHighlights,
 }: Props) {
+  console.log(highlights)
   return (
     <div className="sidebar" style={{ width: "25vw" }}>
       <div className="description" style={{ padding: "1rem" }}>

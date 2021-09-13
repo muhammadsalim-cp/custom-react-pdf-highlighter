@@ -44,7 +44,7 @@ const HighlightPopup = ({
     </div>
   ) : null;
 
-const PRIMARY_PDF_URL = "https://arxiv.org/pdf/1708.08021.pdf";
+const PRIMARY_PDF_URL = "https://bluemetric.s3.us-west-1.amazonaws.com/duckett.pdf";//https://arxiv.org/pdf/1708.08021.pdf
 const SECONDARY_PDF_URL = "https://arxiv.org/pdf/1604.02480.pdf";
 
 const searchParams = new URLSearchParams(document.location.search);
@@ -137,11 +137,6 @@ class App extends Component<{}, State> {
 
     return (
       <div className="App" style={{ display: "flex", height: "100vh" }}>
-        <Sidebar
-          highlights={highlights}
-          resetHighlights={this.resetHighlights}
-          toggleDocument={this.toggleDocument}
-        />
         <div
           style={{
             height: "100vh",
@@ -226,6 +221,12 @@ class App extends Component<{}, State> {
             )}
           </PdfLoader>
         </div>
+        
+        <Sidebar
+          highlights={highlights}
+          resetHighlights={this.resetHighlights}
+          toggleDocument={this.toggleDocument}
+        />
       </div>
     );
   }
