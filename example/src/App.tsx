@@ -9,6 +9,8 @@ import {
   AreaHighlight,
 } from "./react-pdf-highlighter";
 
+// import Header from './components/header/Header';
+
 import type { IHighlight, NewHighlight } from "./react-pdf-highlighter";
 
 import { testHighlights as _testHighlights } from "./test-highlights";
@@ -228,6 +230,9 @@ class App extends Component<{}, State> {
           toggleDocument={this.toggleDocument}
         />
       </div>
+      // <div>
+      //   <Headers />
+      // </div>
     );
   }
 }

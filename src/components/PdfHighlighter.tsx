@@ -421,34 +421,14 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
     }, 100);
   };
 
-  scrollByPageNumber = (pageNumber: number = 3) => {
+  scrollByPageNumber = (pageNumber: number) => {
 
     this.viewer.container.removeEventListener("scroll", this.onScroll);
-
-    const pageViewport = this.viewer.getPageView(pageNumber).viewport;
-
-    const scrollMargin = 10;
     
-    // this.viewer.scrollPageIntoView({
-    //   pageNumber,
-    //   destArray: [
-    //     null,
-    //     { name: "XYZ" },
-    //     ...pageViewport.convertToPdfPoint(
-    //       0,
-    //       scaledToViewport({x1:0,y1:0,x2:0,y2:0,height:0,width:0}, pageViewport).top -
-    //         scrollMargin
-    //     ),
-    //     0,
-    //   ],
-    // });
-
-    // this.setState(
-    //   {
-    //     scrolledToHighlightId: highlight.id,
-    //   },
-    //   () => this.renderHighlights()
-    // );
+    this.viewer.scrollPageIntoView({
+      pageNumber: pageNumber-1,
+      destArray: [null, { name: "XYZ" },1,0],
+    });
 
     // wait for scrolling to finish
     setTimeout(() => {
@@ -596,7 +576,10 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
     const { onSelectionFinished, enableAreaSelection } = this.props;
 
     return (
+      <>
+        <button onClick={(e)=>this.scrollByPageNumber(2)}>abcd</button>
       <div onPointerDown={this.onMouseDown}>
+
         <div
           ref={this.attachRef}
           className="PdfHighlighter"
@@ -665,8 +648,8 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
             />
           ) : null}
         </div>
-        <button onClick={(e)=>this.scrollByPageNumber}>abcd</button>
       </div>
+      </>
     );
   }
 }
