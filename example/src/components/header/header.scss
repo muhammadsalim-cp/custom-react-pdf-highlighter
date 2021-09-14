@@ -1,0 +1,111 @@
+.pdf_header_section{
+    padding: 1rem 3rem;
+    z-index: 99999;
+    box-shadow: 0px 4px 8px 4px rgba(0, 13, 27, 0.06);
+    background-color: #FBFBFB;
+
+    .right_header{
+        text-align: right;
+      }
+      
+      .book_thumbnail{
+        width: 4rem;
+        height: 5rem;
+        margin-right: 1rem;
+      }
+      .book_name{
+        font-size: 1.125rem;
+      }
+      .book_info{
+        display: flex;
+        align-items: center;
+      }
+      .pdf_logo{
+        height: 4.5rem;
+        width: 6.625rem;
+      }
+
+      #tools {
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      
+      #tools button {
+        background-color: transparent;
+        margin: 5px;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        cursor: pointer;
+        /* width: 32px;
+        height: 32px; */
+        width: 22px;
+        height: 22px;
+      }
+      
+      .zoom_buttons{
+        /* width: 20%; */
+        margin-left: 1rem;
+        text-align: center;
+      }
+
+      .page_controllers{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1rem;
+        cursor: pointer;
+        /* color: #3B3C44; */
+        /* background-color: red; */
+      }
+      
+      .page_controllers svg{
+        color: #606165;
+      }
+
+      .page_operation{
+        font-size: 1.125rem;
+        font-weight: 400;
+        color: #3B3C44;
+      }
+
+      .current_page_input{
+        padding: 0.3125rem 0.625rem;
+        border: 1px solid #9BC1E9;
+        background-color: #FBFBFB;
+        border-radius: 4px;
+        outline: none;
+        box-shadow: none;
+        font-size: 1.125rem;
+        font-weight: 400;
+        color: #3B3C44;
+      }
+
+  }
+
+@media screen and (max-width: $md) {
+    .pdf{
+      .operations_header{
+        margin-top: 10px;
+      }
+      .pdf_header_section{
+        padding: 1rem 1.5rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: $md) {
+
+    .operations_header{
+      order:1;
+    }
+    .custom_header{
+      max-height: 160px;
+      min-height: 160px;
+    }
+ 
+  }
