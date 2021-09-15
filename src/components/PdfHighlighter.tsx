@@ -43,6 +43,7 @@ import type {
   T_PDFJS_LinkService,
 } from "../types";
 import type { PDFDocumentProxy } from "pdfjs-dist/types/display/api";
+// import * as PDFJS from "pdfjs-dist/build/pdf";
 
 type T_ViewportHighlight<T_HT> = { position: Position } & T_HT;
 
@@ -61,6 +62,7 @@ interface State<T_HT> {
   tipChildren: JSX.Element | null;
   isAreaSelectionInProgress: boolean;
   scrolledToHighlightId: string;
+  // pageInput: ref | null ;
 }
 
 interface Props<T_HT> {
@@ -96,6 +98,9 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
   Props<T_HT>,
   State<T_HT>
 > {
+
+  // private stepInput: React.RefObject<HTMLInputElement>
+
   static defaultProps = {
     pdfScaleValue: "auto",
   };
@@ -109,6 +114,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
     tip: null,
     tipPosition: null,
     tipChildren: null,
+    // pageInput:null
   };
 
   eventBus: T_EventBus = new EventBus();
@@ -126,13 +132,22 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
 
   constructor(props: Props<T_HT>) {
     super(props);
+    // this.stepInput = React.createRef();
+    // this.setState({pageInput : React.createRef()});
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver(this.debouncedScaleValue);
     }
   }
 
   componentDidMount() {
+    
     this.init();
+
+  }
+
+  changePage=(param : any)=>{
+    console.log('event worked',param.pageNumber)
+    // console.log('event worked',this.viewer.currentPageNumber, param.pageNumber)
   }
 
   attachRef = (ref: HTMLDivElement | null) => {
@@ -144,6 +159,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
       const { ownerDocument: doc } = ref;
       eventBus.on("textlayerrendered", this.onTextLayerRendered);
       eventBus.on("pagesinit", this.onDocumentReady);
+      eventBus.on("pagechanging", this.changePage);
       doc.addEventListener("selectionchange", this.onSelectionChange);
       doc.addEventListener("keydown", this.handleKeyDown);
       doc.defaultView?.addEventListener("resize", this.debouncedScaleValue);
@@ -152,6 +168,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
       this.unsubscribe = () => {
         eventBus.off("pagesinit", this.onDocumentReady);
         eventBus.off("textlayerrendered", this.onTextLayerRendered);
+        eventBus.off("pagechanging", this.changePage);
         doc.removeEventListener("selectionchange", this.onSelectionChange);
         doc.removeEventListener("keydown", this.handleKeyDown);
         doc.defaultView?.removeEventListener(
@@ -574,10 +591,12 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
 
   render() {
     const { onSelectionFinished, enableAreaSelection } = this.props;
-
+    // console.log('page#', PDFJS.pdfViewer._currentPageNumber );
     return (
       <>
-        <button onClick={(e)=>this.scrollByPageNumber(2)}>abcd</button>
+      {/* <Header pageInput={this.stepInput} /> */}
+        {/* <button onClick={(e)=>this.scrollByPageNumber(2)}>abcd</button> */}
+        {/* <h1 style={{color:'black'}} >page number{PDFViewer.current_page_input}</h1> */}
       <div onPointerDown={this.onMouseDown}>
 
         <div

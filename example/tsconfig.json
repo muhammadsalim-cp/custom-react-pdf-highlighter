@@ -7,5 +7,6 @@
     "noEmit": true,
     "allowJs": true
   },
-  "include": ["./src"]
+  "include": ["./src", "./src/declaration.d.ts"],
+  // "include": ["./src/declaration.d.ts"]
 }

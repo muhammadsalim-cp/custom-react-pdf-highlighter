@@ -7,6 +7,10 @@ body {
   color: #fff;
 }
 
+.text{
+  color: black;
+}
+
 .sidebar {
   overflow: auto;
   color: rgb(119, 119, 119);

@@ -12,15 +12,15 @@ import './header.scss';
 export default function Header({
     prevPage=()=>{},
     nextPage=()=>{},
-    pageNavigaton=()=>{},
-    setDisplayedPage=()=>{},
-    displayedPage=1,
+    pageNavigaton=(param : number)=>{},
+    setDisplayedPage=(param : number)=>{},
+    displayedPage='1',
     pageInput=null,
     totalPages=0,
     zoomIn=()=>{},
     zoomOut=()=>{},
     fullScreen=()=>{}
-}) {
+}): JSX.Element {
     return (
         <div className="pdf_header_section">
         <Grid container alignItems="center"> 
