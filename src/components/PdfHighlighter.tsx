@@ -90,6 +90,7 @@ interface Props<T_HT> {
     transformSelection: () => void
   ) => JSX.Element | null;
   enableAreaSelection: (event: MouseEvent) => boolean;
+  pageNumber: number;
 }
 
 const EMPTY_ID = "empty-id";
@@ -187,6 +188,9 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
     }
     if (prevProps.highlights !== this.props.highlights) {
       this.renderHighlights(this.props);
+    }
+    if (prevProps.pageNumber !== this.props.pageNumber) {
+      this.scrollByPageNumber(this.props.pageNumber);
     }
   }
 
